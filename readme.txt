@@ -1,1 +1,1 @@
-This is the finanace tracker app from TCRoRDC
+This is the finanace tracker app from TCRoRD
