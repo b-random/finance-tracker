@@ -1,9 +1,9 @@
 class Stock < ActiveRecord::Base
   
   def self.find_by_ticker(ticker_symbol)
-    where(ticker: ticker_symbol)
+    where(ticker: ticker_symbol).first
   end
-  #This allows us to search the db table by ticker_symbol
+  #This allows us to search the db table for the first instance of  ticker_symbol
     
   
   #These methods are not attached to any instance of a stock and no instances will be created for them to rely on... therefor they are class methods and use "self"  
