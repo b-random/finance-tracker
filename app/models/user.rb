@@ -6,6 +6,12 @@ class User < ActiveRecord::Base
   has_many :user_stocks
   has_many :stocks, through: :user_stocks
   
+  def full_name
+    return "#{first_name} #{last_name}".strip if (first_name || last_name)
+    "Anonymous"
+  end
+  #devise handles sign in/up.  Mod views/devise/registration to include names
+  
   def can_add_stock?(ticker_symbol)
     under_stock_limit? && !stock_already_added?(ticker_symbol) 
   end 
