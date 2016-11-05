@@ -1,0 +1,51 @@
+<div id="friend-lookup">
+  <h3>Find friends</h3>
+  <%= form_tag search_friends_path, remote: true, method: :get, id: 'friend-lookup-form' do %>
+  <!--'remote: true" allows data to display without reloading via AJAX-->
+  <!--HTML:  <form action="/search_friends(friends#search)" method="get">-->
+  <div class="form-group row no-padding text-center col-md-12">
+    <div class="col-md-10">
+      <%= text_field_tag :search_params, params[:search_params], placeholder: "first_name, last_name or email", class: 'form-control search-box input-lg' %>   
+      <!--HTML:  <input id="friend" name="friend" type="text" />-->
+    </div>  
+    <div class="col-md-2">
+      <%= button_tag(type: :submit, class: 'btn btn-lg btn-success') do %>
+        <i class="fa fa-search"></i> Find a person
+      <% end %>
+    </div>
+  </div>      
+    <% end %>
+    <%= render 'common/spinner' %> <!--calls loadtime spinner-->
+    <% if @users %> <!--if current user-->
+      <% if @users.size > 0 %>
+        <div id="friend-lookup-results" class="well results-block col-md-10">
+          <table class='search-results-table col-md-12'>
+            <tbody>
+              <% @user.each do |user| %>
+              <tr>
+                <td><strong>Name:</strong><%= user.full_name %></td>
+                <td><strong>Email:</strong><%= user.email %></td>
+                <td><strong>Profile:</strong><%= link_to 'View Profile', user_path(user), 
+                                                 class: 'btn btn-xs btn-success' %>
+                  <% if current_user.not_friends_with?(user.id) %>  
+                    <%= link_to 'Add as my friend', add_friend_path(user: current_user, friend: user),
+                        class: 'btn btn-xs btn-success', method: :post %>
+                  <% else %>
+                    <span class='label label-primary'>
+                      You are friends
+                    </span>
+                  <% end %>
+                </td>  
+              </tr>  
+              <% end %>
+            </tbody>  
+          </table>  
+        </div> 
+      <% else %>
+        <p class='lead col-md-12'>
+          Nobody matches your search criteria
+        </p>
+      <% end %>  
+    <% end %>  
+  <div id='friend-lookup-errors'></div>
+</div>
