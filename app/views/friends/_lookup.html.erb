@@ -5,7 +5,7 @@
   <!--HTML:  <form action="/search_friends(friends#search)" method="get">-->
   <div class="form-group row no-padding text-center col-md-12">
     <div class="col-md-10">
-      <%= text_field_tag :search_params, params[:search_params], placeholder: "first_name, last_name or email", class: 'form-control search-box input-lg' %>   
+      <%= text_field_tag :search_param, params[:search_param], placeholder: "first name, last name or email", class: 'form-control search-box input-lg' %>   
       <!--HTML:  <input id="friend" name="friend" type="text" />-->
     </div>  
     <div class="col-md-2">
@@ -21,7 +21,7 @@
         <div id="friend-lookup-results" class="well results-block col-md-10">
           <table class='search-results-table col-md-12'>
             <tbody>
-              <% @user.each do |user| %>
+              <% @users.each do |user| %>
               <tr>
                 <td><strong>Name:</strong><%= user.full_name %></td>
                 <td><strong>Email:</strong><%= user.email %></td>
