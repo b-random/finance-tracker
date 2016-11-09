@@ -1,3 +1,13 @@
+.jumbotron {
+  background-image: image-url('stock-market.jpg');
+  background-size: cover;
+  height: 500px;
+}
+
+.panel {
+  background: #f5f5f5;
+}
+
 .results-block {
   display: inline-block;
 }
